@@ -4,9 +4,9 @@ from playwright.sync_api import Page, expect
 def test_wiki(page: Page):
     page.goto("https://ru.wikipedia.org/")
 
-    page.get_by_role("link",name="Нацистская Германия").first.click()
+    page.get_by_role("link",name="Пропаганда в фашистской Италии").first.click()
 
-    heading = page.get_by_role("heading", name="Название государства")
+    heading = page.get_by_role("heading", name="Пропагандируемые идеи и мифы")
 
     expect(heading).to_be_visible()
 
