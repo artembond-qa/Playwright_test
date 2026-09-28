@@ -1,7 +1,16 @@
 name: Automated tests
 
 on:
-  push
+  workflow_dispatch:
+    inputs:
+      deployment_target:
+        description: Choose target
+        required: true
+        default:
+        type: choice
+        options:
+          - first_test
+          - second_test
 
 jobs:
   test:
@@ -18,5 +27,9 @@ jobs:
         run: pip install -r requirements.txt
       - name: Install Chrome
         run: python -m playwright install --with-deps chromium
-      - name: Run test
+      - name: first_test
+        if: "github.event.inputs.deployment_target == 'first_test'"
+        run: pytest
+      - name: second_test
+        if: "github.event.inputs.deployment_target == 'second_test'"
         run: pytest
